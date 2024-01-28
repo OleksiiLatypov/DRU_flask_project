@@ -52,6 +52,6 @@ class Dataset:
         @return: pd.DataFrame, pd.Series
         """
         data = pd.read_csv(self.csv_file, nrows=items_number)
-        y = data['Survived']
-        x = data.drop(['Survived'], axis=1)
+        y = data['RainTomorrow']
+        x = data.drop(['RainTomorrow'], axis=1)
         return x, y
