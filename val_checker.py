@@ -31,4 +31,3 @@ loaded_model = pickle.load(open('models/LogisticRegression.pickle', 'rb'))
 res = loaded_model.score(X, y)
 print('Accuracy')
 print(res)
-

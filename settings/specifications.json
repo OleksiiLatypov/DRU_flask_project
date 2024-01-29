@@ -26,30 +26,30 @@
       "RainTomorrow"
     ],
     "final_columns": [
-        "Location",
-        "MinTemp",
-        "MaxTemp",
-        "Rainfall",
-        "Evaporation",
-        "Sunshine",
-        "WindGustDir",
-        "WindGustSpeed",
-        "WindDir9am",
-        "WindDir3pm",
-        "WindSpeed9am",
-        "WindSpeed3pm",
-        "Humidity9am",
-        "Humidity3pm",
-        "Pressure9am",
-        "Pressure3pm",
-        "Cloud9am",
-        "Cloud3pm",
-        "Temp9am",
-        "Temp3pm",
-        "RainToday",
-        "year",
-        "month",
-        "day"
+      "Location",
+      "MinTemp",
+      "MaxTemp",
+      "Rainfall",
+      "Evaporation",
+      "Sunshine",
+      "WindGustDir",
+      "WindGustSpeed",
+      "WindDir9am",
+      "WindDir3pm",
+      "WindSpeed9am",
+      "WindSpeed3pm",
+      "Humidity9am",
+      "Humidity3pm",
+      "Pressure9am",
+      "Pressure3pm",
+      "Cloud9am",
+      "Cloud3pm",
+      "Temp9am",
+      "Temp3pm",
+      "RainToday",
+      "year",
+      "month",
+      "day"
     ],
     "y": "RainTomorrow",
     "metrics": "accuracy_score"
@@ -57,123 +57,82 @@
   "operations": [
     {
       "operation_number": 1,
-      "operation_name": "columns_combination",
+      "operation_name": "process_dates",
       "params": {
-        "in_columns_list": [
-          [
-            "SibSp",
-            "Parch"
-          ]
+        "in_columns": [
+          "Date"
         ],
-        "out_columns": [
-          "FamilySize"
-        ],
-        "coefficients_list": [
-          [
-            1,
-            1
-          ]
-        ],
-        "biases": [
-          1
-        ],
-        "methods": [
-          "addition"
+        "date_formats": [
+          "%x"
         ]
       }
     },
     {
       "operation_number": 2,
-      "operation_name": "replace",
+      "operation_name": "drop_columns",
       "params": {
         "in_columns": [
-          "IsAlone"
-        ],
-        "old_values": [
-          0
-        ],
-        "new_values": [
-          1
-        ],
-        "condition_columns": [
-          "FamilySize"
-        ],
-        "conditions": [
-          "equal"
-        ],
-        "condition_values": [
-          1
-        ],
-        "defaults": [
-          0
-        ],
-        "inplaces": [
-          "False"
+          "Date"
         ]
       }
     },
     {
       "operation_number": 3,
-      "operation_name": "apply_regex",
+      "operation_name": "handle_outliers",
       "params": {
         "in_columns": [
-          "Name"
+          "MinTemp",
+          "MaxTemp",
+          "Rainfall",
+          "Evaporation",
+          "Sunshine",
+          "WindGustSpeed",
+          "WindSpeed9am",
+          "WindSpeed3pm",
+          "Humidity9am",
+          "Humidity3pm",
+          "Pressure9am",
+          "Pressure3pm",
+          "Cloud9am",
+          "Cloud3pm",
+          "Temp9am",
+          "Temp3pm"
         ],
-        "out_columns": [
-          "Title"
+        "modes": [
+          "std"
         ],
         "methods": [
-          "search"
+          "cap"
         ],
-        "patterns": [
-          " ([A-Za-z]+)\\."
-        ],
-        "groups": [
-          1
-        ],
-        "inplaces": [
-          "False"
+        "factors": [
+          1.5
         ]
       }
     },
     {
       "operation_number": 4,
-      "operation_name": "replace",
+      "operation_name": "fill_nans",
       "params": {
         "in_columns": [
-          "Title",
-          "Title",
-          "Title"
+          "MinTemp",
+          "MaxTemp",
+          "Rainfall",
+          "Evaporation",
+          "Sunshine",
+          "WindGustSpeed",
+          "WindSpeed9am",
+          "WindSpeed3pm",
+          "Humidity9am",
+          "Humidity3pm",
+          "Pressure9am",
+          "Pressure3pm",
+          "Cloud9am",
+          "Cloud3pm",
+          "Temp9am",
+          "Temp3pm"
         ],
-        "old_values": [
-          [
-            "Lady",
-            "Countess",
-            "Capt",
-            "Col",
-            "Don",
-            "Dr",
-            "Major",
-            "Rev",
-            "Sir",
-            "Jonkheer",
-            "Dona"
-          ],
-          [
-            "Mlle",
-            "Ms"
-          ],
-          "Mme"
-        ],
-        "new_values": [
-          "Rare",
-          "Miss",
-          "Mrs"
-        ],
-        "inplaces": [
-          "True",
-          "True",
-          "True"
+        "methods": [
+          "mean"
         ]
       }
     },
@@ -182,34 +141,28 @@
       "operation_name": "fill_nans",
       "params": {
         "in_columns": [
-          "Fare",
-          "Age",
-          "Title",
-          "Embarked"
+          "WindGustDir",
+          "WindDir9am",
+          "WindDir3pm",
+          "RainToday",
+          "RainTomorrow"
         ],
         "methods": [
-          "qcut",
-          "random",
-          "zero",
           "mode"
         ]
       }
     },
     {
-      "operation_number": 5,
-      "operation_name": "bins",
+      "operation_number": 6,
+      "operation_name": "replace",
       "params": {
         "in_columns": [
-          "Fare",
-          "Age"
+          "RainTomorrow",
+          "RainToday"
         ],
-        "methods": [
-          "qcut",
-          "cut"
-        ],
-        "bins_nums": [
-          4,
-          5
+        "new_values": [
+          0,
+          1
         ],
         "inplaces": [
           "True",
@@ -218,30 +171,353 @@
       }
     },
     {
-      "operation_number": 6,
-      "operation_name": "drop_columns",
+      "operation_number": 7,
+      "operation_name": "replace",
       "params": {
         "in_columns": [
-          "PassengerId",
-          "Name",
-          "Ticket",
-          "Cabin",
-          "SibSp",
-          "Parch",
-          "FamilySize"
+          "WindGustDir"
+        ],
+        "old_values": [
+          "W",
+          "WNW",
+          "WSW",
+          "NE",
+          "NNW",
+          "N",
+          "NNE",
+          "SW",
+          "ENE",
+          "SSE",
+          "S",
+          "NW",
+          "SE",
+          "ESE",
+          "E",
+          "SSW"
+        ],
+        "new_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "inplaces": [
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True"
         ]
       }
     },
     {
-      "operation_number": 7,
-      "operation_name": "encode_labels",
+      "operation_number": 8,
+      "operation_name": "replace",
       "params": {
         "in_columns": [
-          "Sex",
-          "Title",
-          "Embarked",
-          "Fare",
-          "Age"
+          "WindDir9am"
+        ],
+        "old_values": [
+          "W",
+          "NNW",
+          "SE",
+          "ENE",
+          "SW",
+          "SSE",
+          "S",
+          "NE",
+          "N",
+          "SSW",
+          "WSW",
+          "ESE",
+          "E",
+          "NW",
+          "WNW",
+          "NNE"
+        ],
+        "new_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "inplaces": [
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True"
+        ]
+      }
+    },
+    {
+      "operation_number": 9,
+      "operation_name": "replace",
+      "params": {
+        "in_columns": [
+          "WindDir3pm"
+        ],
+        "old_values": [
+          "WNW",
+          "WSW",
+          "E",
+          "NW",
+          "W",
+          "SSE",
+          "ESE",
+          "ENE",
+          "NNW",
+          "SSW",
+          "SW",
+          "SE",
+          "N",
+          "S",
+          "NNE",
+          "NE"
+        ],
+        "new_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "inplaces": [
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True"
+        ]
+      }
+    },
+    {
+      "operation_number": 10,
+      "operation_name": "replace",
+      "params": {
+        "in_columns": [
+          "Location"
+        ],
+        "old_values": [
+          "Albury",
+          "BadgerysCreek",
+          "Cobar",
+          "CoffsHarbour",
+          "Moree",
+          "Newcastle",
+          "NorahHead",
+          "NorfolkIsland",
+          "Penrith",
+          "Richmond",
+          "Sydney",
+          "SydneyAirport",
+          "WaggaWagga",
+          "Williamtown",
+          "Wollongong",
+          "Canberra",
+          "Tuggeranong",
+          "MountGinini",
+          "Ballarat",
+          "Bendigo",
+          "Sale",
+          "MelbourneAirport",
+          "Melbourne",
+          "Mildura",
+          "Nhil",
+          "Portland",
+          "Watsonia",
+          "Dartmoor",
+          "Brisbane",
+          "Cairns",
+          "GoldCoast",
+          "Townsville",
+          "Adelaide",
+          "MountGambier",
+          "Nuriootpa",
+          "Woomera",
+          "Albany",
+          "Witchcliffe",
+          "PearceRAAF",
+          "PerthAirport",
+          "Perth",
+          "SalmonGums",
+          "Walpole",
+          "Hobart",
+          "Launceston",
+          "AliceSprings",
+          "Darwin",
+          "Katherine",
+          "Uluru"
+        ],
+        "new_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "inplaces": [
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True",
+          "True"
         ]
       }
     }

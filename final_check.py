@@ -23,7 +23,6 @@ train_x, train_y = train_set[x_columns], train_set[y_column]
 print('TRAIN_Y\n', train_y)
 val_x, val_y = val_set[x_columns], val_set[y_column]
 
-print('val_x\n', val_x)
 
 loader = DataLoader()
 loader.fit(val_x)
@@ -34,9 +33,9 @@ req_data = {'data': json.dumps(val_x.to_dict())}
 response = requests.get('http://0.0.0.0:8000/predict', data=req_data)
 api_predict = response.json()['prediction']
 print('predict: ', api_predict[:10])
-#print('val_y\n', val_y)
+
 VAL_Y = val_processed['RainTomorrow']
-print('val_y\n', VAL_Y)
+print('Y:', VAL_Y[:10])
 api_score = eval(metrics)(VAL_Y, api_predict)
 print('accuracy: ', api_score)
 

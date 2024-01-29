@@ -87,7 +87,7 @@ class DataLoader(object):
 
         # pd.get_dummies(rain['RainToday'],drop_first = True)
 
-        #self.dataset['RainTomorrow'] = self.dataset['RainTomorrow'].replace({'No': 0, 'Yes': 1})
+        self.dataset['RainTomorrow'] = self.dataset['RainTomorrow'].replace({'No': 0, 'Yes': 1})
 
         # Encode data
         self.dataset['WindGustDir'] = self.dataset['WindGustDir'].replace(self.encode_data(self.dataset, 'WindGustDir'))
