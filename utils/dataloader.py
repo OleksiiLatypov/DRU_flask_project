@@ -78,7 +78,7 @@ class DataLoader(object):
 
 
 # data = pd.read_csv('/Users/oleksiilatypov/Desktop/DataScience_Fundementals/DRU_flask/data/train.csv')
-#
+
 # res = DataLoader()
 # res.fit(data)
 # # res.load_data()
