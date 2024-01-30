@@ -20,7 +20,6 @@ train_set = pd.read_csv(TRAIN_CSV, header=0)
 val_set = pd.read_csv(VAL_CSV, header=0)
 
 train_x, train_y = train_set[x_columns], train_set[y_column]
-print('TRAIN_Y\n', train_y)
 val_x, val_y = val_set[x_columns], val_set[y_column]
 
 
@@ -35,9 +34,7 @@ api_predict = response.json()['prediction']
 print('predict: ', api_predict[:10])
 
 VAL_Y = val_processed['RainTomorrow']
-print('Y:', VAL_Y[:10])
+
 api_score = eval(metrics)(VAL_Y, api_predict)
 print('accuracy: ', api_score)
 
-if __name__ == '__main__':
-    print()
