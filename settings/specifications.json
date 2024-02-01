@@ -46,10 +46,7 @@
       "Cloud3pm",
       "Temp9am",
       "Temp3pm",
-      "RainToday",
-      "year",
-      "month",
-      "day"
+      "RainToday"
     ],
     "y": "RainTomorrow",
     "metrics": "accuracy_score"
@@ -57,18 +54,6 @@
   "operations": [
     {
       "operation_number": 1,
-      "operation_name": "process_dates",
-      "params": {
-        "in_columns": [
-          "Date"
-        ],
-        "date_formats": [
-          "%x"
-        ]
-      }
-    },
-    {
-      "operation_number": 2,
       "operation_name": "drop_columns",
       "params": {
         "in_columns": [
@@ -77,40 +62,7 @@
       }
     },
     {
-      "operation_number": 3,
-      "operation_name": "handle_outliers",
-      "params": {
-        "in_columns": [
-          "MinTemp",
-          "MaxTemp",
-          "Rainfall",
-          "Evaporation",
-          "Sunshine",
-          "WindGustSpeed",
-          "WindSpeed9am",
-          "WindSpeed3pm",
-          "Humidity9am",
-          "Humidity3pm",
-          "Pressure9am",
-          "Pressure3pm",
-          "Cloud9am",
-          "Cloud3pm",
-          "Temp9am",
-          "Temp3pm"
-        ],
-        "modes": [
-          "std"
-        ],
-        "methods": [
-          "cap"
-        ],
-        "factors": [
-          1.5
-        ]
-      }
-    },
-    {
-      "operation_number": 4,
+      "operation_number": 2,
       "operation_name": "fill_nans",
       "params": {
         "in_columns": [
@@ -137,7 +89,7 @@
       }
     },
     {
-      "operation_number": 5,
+      "operation_number": 3,
       "operation_name": "fill_nans",
       "params": {
         "in_columns": [
@@ -153,7 +105,7 @@
       }
     },
     {
-      "operation_number": 6,
+      "operation_number": 4,
       "operation_name": "replace",
       "params": {
         "in_columns": [
@@ -171,7 +123,7 @@
       }
     },
     {
-      "operation_number": 7,
+      "operation_number": 5,
       "operation_name": "replace",
       "params": {
         "in_columns": [
@@ -234,7 +186,7 @@
       }
     },
     {
-      "operation_number": 8,
+      "operation_number": 6,
       "operation_name": "replace",
       "params": {
         "in_columns": [
@@ -297,7 +249,7 @@
       }
     },
     {
-      "operation_number": 9,
+      "operation_number": 7,
       "operation_name": "replace",
       "params": {
         "in_columns": [
@@ -360,7 +312,7 @@
       }
     },
     {
-      "operation_number": 10,
+      "operation_number": 8,
       "operation_name": "replace",
       "params": {
         "in_columns": [

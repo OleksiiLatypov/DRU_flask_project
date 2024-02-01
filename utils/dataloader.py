@@ -1,3 +1,5 @@
+from pprint import pprint
+
 import pandas as pd
 import numpy as np
 
@@ -12,18 +14,24 @@ def fill_with_mode(df: pd.DataFrame, categorical_null: list) -> pd.DataFrame:
 
 
 def fill_with_mean(df: pd.DataFrame, numerical_null: list) -> pd.DataFrame:
-    factor = 1.5
     for el in numerical_null:
-        mean_val = df[el].mean()
-        std_val = df[el].std()
-        upper_limit = mean_val + std_val * factor
-        lower_limit = mean_val - std_val * factor
-        df[el] = df[el].apply(lambda x: upper_limit if x > upper_limit else (lower_limit if x < lower_limit else x))
-
-    for column in numerical_null:
-        mean_val = df[column].mean()
-        df[column] = df[column].fillna(mean_val)
+        mode_val = df[el].mean()
+        df[el].fillna(mode_val, inplace=True)
     return df
+
+# def fill_with_mean(df: pd.DataFrame, numerical_null: list) -> pd.DataFrame:
+#     factor = 1.5
+#     for el in numerical_null:
+#         mean_val = df[el].mean()
+#         std_val = df[el].std()
+#         upper_limit = mean_val + std_val * factor
+#         lower_limit = mean_val - std_val * factor
+#         df[el] = df[el].apply(lambda x: upper_limit if x > upper_limit else (lower_limit if x < lower_limit else x))
+#         #df[el] = df[el].clip(lower=lower_limit, upper=upper_limit).fillna(mean_val)
+#     for column in numerical_null:
+#         mean_val = df[column].mean()
+#         df[column] = df[column].fillna(mean_val)
+#     return df
 
 
 def encode_data(df: pd.DataFrame, feature_name: str) -> dict:
@@ -41,10 +49,11 @@ class DataLoader(object):
 
     def load_data(self):
         # transform data
-        self.dataset['Date'] = pd.to_datetime(self.dataset['Date'])
-        self.dataset['year'] = self.dataset['Date'].dt.year
-        self.dataset['month'] = self.dataset['Date'].dt.month
-        self.dataset['day'] = self.dataset['Date'].dt.day
+        # self.dataset['Date'] = pd.to_datetime(self.dataset['Date'])
+        #
+        # self.dataset['year'] = self.dataset['Date'].dt.year
+        # self.dataset['month'] = self.dataset['Date'].dt.month
+        # self.dataset['day'] = self.dataset['Date'].dt.day
 
         # drop column Date
         self.dataset = self.dataset.drop('Date', axis=1)
@@ -76,13 +85,16 @@ class DataLoader(object):
         return self.dataset
 
 
-
 # data = pd.read_csv('/Users/oleksiilatypov/Desktop/DataScience_Fundementals/DRU_flask/data/train.csv')
-
+# print(data.head())
 # res = DataLoader()
 # res.fit(data)
-# # res.load_data()
+# #res.load_data()
 # r = res.load_data()
-#
+# #
 # if __name__ == '__main__':
-#     print(r.head(50))
+#     print()
+#     # pprint(r['Location'].unique())
+#     # pprint(r.isnull().sum())
+#     print(r.head())
+

@@ -6,7 +6,6 @@ from flask import Flask, request, jsonify, make_response
 import pandas as pd
 import json
 
-
 app = Flask(__name__)
 
 
@@ -20,9 +19,12 @@ def predict():
     data = json.loads(request.form.get(received_keys[0]))
     df = pd.DataFrame.from_dict(data)
 
+
     loader = DataLoader()
     loader.fit(df)
-    processed_df = loader.load_data()
+    processed_df_target = loader.load_data()
+
+    processed_df = processed_df_target.drop('RainTomorrow', axis=1)
 
     predictor = Predictor()
     response_dict = {'prediction': predictor.predict(processed_df).tolist()}
