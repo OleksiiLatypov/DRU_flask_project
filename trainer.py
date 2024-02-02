@@ -21,14 +21,14 @@ loader = DataLoader()
 loader.fit(X_raw)
 X = loader.load_data()
 print(X.head())
-x_train = X.drop('RainTomorrow', axis=1)
-print(x_train.head())
-y = X.RainTomorrow
+
+y = raw_train.RainTomorrow
 print(y.head())
 
-model = LogisticRegression(solver='liblinear', random_state=0)
-model.fit(x_train, y)
+model = LogisticRegression()
+model.fit(X, y)
 with open('models/LogisticRegression.pickle', 'wb')as f:
     pickle.dump(model, f)
 
-print('Success')
+if __name__ == '__main__':
+    print('Successes')

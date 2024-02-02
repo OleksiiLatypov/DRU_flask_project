@@ -21,19 +21,13 @@ val_x, val_y = val_set[x_columns], val_set[y_column]
 
 loader = DataLoader()
 loader.fit(val_x)
-val_processed_with_target = loader.load_data()
-print('data: ', val_processed_with_target[:10])
-
-val_processed = val_processed_with_target.drop('RainTomorrow', axis=1)
+val_processed = loader.load_data()
 print('data: ', val_processed[:10])
-
-y_test = val_processed_with_target['RainTomorrow']
 
 req_data = {'data': json.dumps(val_x.to_dict())}
 response = requests.get('http://0.0.0.0:8000/predict', data=req_data)
 api_predict = response.json()['prediction']
 print('predict: ', api_predict[:10])
 
-api_score = eval(metrics)(y_test, api_predict)  # change val_y with y_test
+api_score = eval(metrics)(val_y, api_predict)
 print('accuracy: ', api_score)
-
