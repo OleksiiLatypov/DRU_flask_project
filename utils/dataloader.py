@@ -28,15 +28,8 @@ class DataLoader(object):
             std_val = data[column].std()
 
             # Standardize the column
-            data[column] = (data[column] - mean_val) / std_val
+            data.loc[:, column] = (data[column] - mean_val) / std_val
         return data
-
-    # def encode_data(self, df: pd.DataFrame, feature_name: str) -> dict:
-    #     mapping_dict = {}
-    #     unique_values = list(df[feature_name].unique())
-    #     for idx in range(len(unique_values)):
-    #         mapping_dict[unique_values[idx]] = idx
-    #     return mapping_dict
 
     def load_data(self):
 
@@ -57,16 +50,7 @@ class DataLoader(object):
         numeric_columns = self.dataset.select_dtypes(include=['float64']).columns
         self.dataset[numeric_columns] = self.standardize_columns(self.dataset[numeric_columns])
 
-        # # Replace str to int
-        # self.dataset['RainToday'] = self.dataset['RainToday'].replace({'No': 0, 'Yes': 1})
-        #
-        # # Encode data
-        # self.dataset['WindGustDir'] = self.dataset['WindGustDir'].replace(self.encode_data(self.dataset, 'WindGustDir'))
-        # self.dataset['WindDir9am'] = self.dataset['WindDir9am'].replace(self.encode_data(self.dataset, 'WindDir9am'))
-        # self.dataset['WindDir3pm'] = self.dataset['WindDir3pm'].replace(self.encode_data(self.dataset, 'WindDir3pm'))
-        # self.dataset['Location'] = self.dataset['Location'].replace(self.encode_data(self.dataset, 'Location'))
-
-
+        # Label Encoder
         le = LabelEncoder()
         le.fit(self.dataset['RainToday'])
         self.dataset['RainToday'] = le.transform(self.dataset['RainToday'])
@@ -90,25 +74,25 @@ class DataLoader(object):
         return self.dataset
 
 
-data_set = pd.read_csv('/Users/oleksiilatypov/Desktop/DataScience_Fundementals/DRU_flask/data/train.csv')
-
-res = DataLoader()
-res.fit(data_set)
-r = res.load_data()
-# #
-if __name__ == '__main__':
-    print()
-    # pprint(r['Location'].unique())
-    # pprint(r.isnull().sum())
-    # print(data_set['WindGustDir'].unique())
-    # print(r['WindGustDir'].unique())
-    # print(data_set['WindDir9am'].unique())
-    # print(r['WindDir9am'].unique())
-    # print(data_set['WindDir3pm'].unique())
-    # print(r['WindDir3pm'].unique())
-    # print(data_set['Location'].unique())
-    # print(sorted(r['Location'].unique()))
-    print(data_set.head(10))
-    print(r.head(10))
-    # print(r.head(10).isnull().sum())
-    # print(r.head(10).info())
+# data_set = pd.read_csv('/Users/oleksiilatypov/Desktop/DataScience_Fundementals/DRU_flask/data/train.csv')
+#
+# res = DataLoader()
+# res.fit(data_set)
+# r = res.load_data()
+# # #
+# if __name__ == '__main__':
+#     print()
+#     # pprint(r['Location'].unique())
+#     # pprint(r.isnull().sum())
+#     # print(data_set['WindGustDir'].unique())
+#     # print(r['WindGustDir'].unique())
+#     # print(data_set['WindDir9am'].unique())
+#     # print(r['WindDir9am'].unique())
+#     # print(data_set['WindDir3pm'].unique())
+#     # print(r['WindDir3pm'].unique())
+#     # print(data_set['Location'].unique())
+#     # print(sorted(r['Location'].unique()))
+#     print(data_set.head(10))
+#     print(r.head(10))
+#     # print(r.head(10).isnull().sum())
+#     # print(r.head(10).info())
