@@ -33,6 +33,13 @@ class DataLoader(object):
 
     def load_data(self):
 
+        # transform data
+        self.dataset['Date'] = pd.to_datetime(self.dataset['Date'])
+
+        self.dataset['year'] = self.dataset['Date'].dt.year
+        self.dataset['month'] = self.dataset['Date'].dt.month
+        self.dataset['day'] = self.dataset['Date'].dt.day
+
         # Drop column Date
         self.dataset = self.dataset.drop('Date', axis=1)
 
@@ -74,25 +81,25 @@ class DataLoader(object):
         return self.dataset
 
 
-# data_set = pd.read_csv('/Users/oleksiilatypov/Desktop/DataScience_Fundementals/DRU_flask/data/train.csv')
-#
-# res = DataLoader()
-# res.fit(data_set)
-# r = res.load_data()
-# # #
-# if __name__ == '__main__':
-#     print()
-#     # pprint(r['Location'].unique())
-#     # pprint(r.isnull().sum())
-#     # print(data_set['WindGustDir'].unique())
-#     # print(r['WindGustDir'].unique())
-#     # print(data_set['WindDir9am'].unique())
-#     # print(r['WindDir9am'].unique())
-#     # print(data_set['WindDir3pm'].unique())
-#     # print(r['WindDir3pm'].unique())
-#     # print(data_set['Location'].unique())
-#     # print(sorted(r['Location'].unique()))
-#     print(data_set.head(10))
-#     print(r.head(10))
-#     # print(r.head(10).isnull().sum())
-#     # print(r.head(10).info())
+data_set = pd.read_csv('/Users/oleksiilatypov/Desktop/DataScience_Fundementals/DRU_flask/data/train.csv')
+
+res = DataLoader()
+res.fit(data_set)
+r = res.load_data()
+# #
+if __name__ == '__main__':
+    print()
+    # pprint(r['Location'].unique())
+    # pprint(r.isnull().sum())
+    # print(data_set['WindGustDir'].unique())
+    # print(r['WindGustDir'].unique())
+    # print(data_set['WindDir9am'].unique())
+    # print(r['WindDir9am'].unique())
+    # print(data_set['WindDir3pm'].unique())
+    # print(r['WindDir3pm'].unique())
+    # print(data_set['Location'].unique())
+    # print(sorted(r['Location'].unique()))
+    print(data_set.head(10))
+    print(r.head(10))
+    # print(r.head(10).isnull().sum())
+    # print(r.head(10).info())
