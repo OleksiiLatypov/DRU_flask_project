@@ -1,7 +1,7 @@
 **Final Flask Project DataRoot**
 
 
-The aim of this project is to provide developing a machine learning solution from start to finish. By following data preprocessing, feature engineering, model selection and training, web API was build.
+The aim of this project is to provide developing a machine learning solution from start to finish. By following data preprocessing, feature engineering, model selection and training - web API was build.
 
 Dataset wat taken from Kaggle:
 
