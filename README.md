@@ -1,4 +1,4 @@
-**Final Flask Project DataRoot**
+***Final Flask Project DataRoot***
 
 
 The aim of this project is to provide developing a machine learning solution from start to finish. By following data preprocessing, feature engineering, model selection and training - web API was build.
@@ -11,7 +11,7 @@ Repository (image) on Docker Hub:
 ```
 oleksii1994/flask_project:v9
 ```
-** Project Structure **
+**Project Structure**
 ```
 app
     ├── data                        - contains train and validation data
