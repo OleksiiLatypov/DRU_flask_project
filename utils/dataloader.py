@@ -62,44 +62,40 @@ class DataLoader(object):
         le.fit(self.dataset['RainToday'])
         self.dataset['RainToday'] = le.transform(self.dataset['RainToday'])
 
-        le = LabelEncoder()
         le.fit(self.dataset['WindGustDir'])
         self.dataset['WindGustDir'] = le.transform(self.dataset['WindGustDir'])
 
-        le = LabelEncoder()
         le.fit(self.dataset['WindDir9am'])
         self.dataset['WindDir9am'] = le.transform(self.dataset['WindDir9am'])
 
-        le = LabelEncoder()
         le.fit(self.dataset['WindDir3pm'])
         self.dataset['WindDir3pm'] = le.transform(self.dataset['WindDir3pm'])
 
-        le = LabelEncoder()
         le.fit(self.dataset['Location'])
         self.dataset['Location'] = le.transform(self.dataset['Location'])
 
         return self.dataset
 
 
-data_set = pd.read_csv('/Users/oleksiilatypov/Desktop/DataScience_Fundementals/DRU_flask/data/train.csv')
-
-res = DataLoader()
-res.fit(data_set)
-r = res.load_data()
-# #
-if __name__ == '__main__':
-    print()
-    # pprint(r['Location'].unique())
-    # pprint(r.isnull().sum())
-    # print(data_set['WindGustDir'].unique())
-    # print(r['WindGustDir'].unique())
-    # print(data_set['WindDir9am'].unique())
-    # print(r['WindDir9am'].unique())
-    # print(data_set['WindDir3pm'].unique())
-    # print(r['WindDir3pm'].unique())
-    # print(data_set['Location'].unique())
-    # print(sorted(r['Location'].unique()))
-    print(data_set.head(10))
-    print(r.head(10))
-    # print(r.head(10).isnull().sum())
-    # print(r.head(10).info())
+# data_set = pd.read_csv('/Users/oleksiilatypov/Desktop/DataScience_Fundementals/DRU_flask/data/train.csv')
+#
+# res = DataLoader()
+# res.fit(data_set)
+# r = res.load_data()
+# # #
+# if __name__ == '__main__':
+#     print()
+#     # pprint(r['Location'].unique())
+#     # pprint(r.isnull().sum())
+#     # print(data_set['WindGustDir'].unique())
+#     # print(r['WindGustDir'].unique())
+#     # print(data_set['WindDir9am'].unique())
+#     # print(r['WindDir9am'].unique())
+#     # print(data_set['WindDir3pm'].unique())
+#     # print(r['WindDir3pm'].unique())
+#     # print(data_set['Location'].unique())
+#     # print(sorted(r['Location'].unique()))
+#     print(data_set.head(10))
+#     print(r.head(10))
+#     # print(r.head(10).isnull().sum())
+#     #print(data_set.info())
