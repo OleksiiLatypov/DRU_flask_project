@@ -11,7 +11,7 @@ Repository (image) on Docker Hub:
 ```
 oleksii1994/flask_project:v9
 ```
-
+** Project Structure **
 ```
 app
     ├── data                        - contains train and validation data
@@ -31,12 +31,12 @@ app
     │   ├── predictor.py            - predictor.
     │   ├── save_model.py           - save model.
     │   ├── test_data.py            - test model on VAL.CSV
-    │   ├── test_different_models.py- choose the best estimator
+    │   ├── test_different_models.py- choose the best estimator.
     │   └── trainer.py              - train script.
     │ 
     ├── app.py                      - route, app.
     │
-    ├── final_check.py              - test api and model
+    ├── final_check.py              - test api and model perfomance
     │
     ├── rain_australia.ipynb        - colab notebook
     │
