@@ -1,5 +1,7 @@
 ***Final Flask Project DataRoot***
 
+Problem Statement:
+Predictive model on Rain Dataset to predict whether or not it will rain tomorrow in Australia
 
 The aim of this project is to provide developing a machine learning solution from start to finish. By following data preprocessing, feature engineering, model selection and training - web API was build.
 
